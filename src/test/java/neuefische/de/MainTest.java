@@ -119,9 +119,9 @@ class MainTest {
 
     @ParameterizedTest
     @ValueSource(strings = { "password", "pentagon", "swordfish" })
-    void isCommonlyUsedPassword_WhenCommonPassword_returnTrue() throws FileNotFoundException {
+    void isCommonlyUsedPassword_WhenCommonPassword_returnTrue(String pw) throws FileNotFoundException {
         // GIVEN
-        String pw = "password";
+
         // WHEN
         Boolean actual = Main.isCommonlyUsedPassword(pw);
         // THEN
