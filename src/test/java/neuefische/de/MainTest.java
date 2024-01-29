@@ -2,6 +2,8 @@ package neuefische.de;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
@@ -73,9 +75,19 @@ class MainTest {
     }
 
     @Test
-    void isCommonlyUsedPassword(){
+    void isCommonlyUsedPassword_When12345678AbX_returnFalse() throws FileNotFoundException {
         // GIVEN
         String pw = "12345678Ab!";
+        // WHEN
+        Boolean actual = Main.isCommonlyUsedPassword(pw);
+        // THEN
+        assertFalse(actual);
+    }
+
+    @Test
+    void isCommonlyUsedPassword_WhenPassword_returnTrue() throws FileNotFoundException {
+        // GIVEN
+        String pw = "password";
         // WHEN
         Boolean actual = Main.isCommonlyUsedPassword(pw);
         // THEN

@@ -1,5 +1,8 @@
 package neuefische.de;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,7 +56,20 @@ public class Main {
     }
 
     // https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/10k-most-common.txt
-    public static Boolean isCommonlyUsedPassword(String pw) {
+    public static Boolean isCommonlyUsedPassword(String pw) throws FileNotFoundException {
+
+        File file = new File("src/main/resources/10k-most-common.txt");
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                final String lineFromFile = scanner.nextLine();
+                System.out.println(lineFromFile);
+                if (lineFromFile.contains(pw)) {
+                    // found a weak password
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
