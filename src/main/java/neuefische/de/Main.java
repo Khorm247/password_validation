@@ -2,14 +2,20 @@ package neuefische.de;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
-        hasLowercaseLetters("asdflkjasdf");
         sayHelloWorld();
+        String password1 = generateRandomPassword(16);
+        String password2 = generateRandomPassword(80);
+        String password3 = generateRandomPassword(4);
+        System.out.println(password1);
+        System.out.println(password2);
+        System.out.println(password3);
     }
 
     public static void sayHelloWorld() {
@@ -73,8 +79,29 @@ public class Main {
         return false;
     }
 
-    public static String generateRandomPassword() {
-        return "";
+    public static String generateRandomPassword(int passwordLength) {
+        if (passwordLength < 8)
+        {
+            passwordLength = 8;
+            System.out.println("changed password length to minimum length");
+        }
+
+
+        Random r = new Random();
+
+        String alphabet = "<([{\\^-=$!|]})?*+.>" +
+                "0123456789" +
+                "abcdefghijklmnopqrstuvwxyz".toUpperCase() +
+                "abcdefghijklmnopqrstuvwxyz";
+
+        StringBuilder result = new StringBuilder();
+
+
+        for (int i = 0; i < passwordLength; i++) {
+            result.append(alphabet.charAt(r.nextInt(alphabet.length())));
+        }
+
+        return result.toString();
     }
 
 

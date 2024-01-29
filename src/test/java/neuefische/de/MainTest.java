@@ -97,7 +97,7 @@ class MainTest {
     @Test
     void generateRandomPassword(){
         // GIVEN
-        String pw = Main.generateRandomPassword();
+        String pw = Main.generateRandomPassword(16);
         // WHEN
         Boolean actual = Main.passesAllSafePasswordTests(pw);
         // THEN
