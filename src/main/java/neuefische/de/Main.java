@@ -1,5 +1,8 @@
 package neuefische.de;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Main {
     public static void main(String[] args) {
         hasLowercaseLetters("asdflkjasdf");
@@ -42,9 +45,14 @@ public class Main {
     }
 
     public static Boolean containsSpecialCharacters(String pw) {
+        char[] allowedCharacters = "<([{\\^-=$!|]})?*+.>".toCharArray();
+        for(char c : allowedCharacters){
+            if (pw.contains("" + c)) return true;
+        }
         return false;
     }
 
+    // https://github.com/danielmiessler/SecLists/blob/master/Passwords/Common-Credentials/10k-most-common.txt
     public static Boolean isCommonlyUsedPassword(String pw) {
         return false;
     }
@@ -53,7 +61,34 @@ public class Main {
         return "";
     }
 
+
+    // considering that these are the bonus tasks REGEX is now allowed :D
+    // https://www.geeksforgeeks.org/how-to-validate-a-password-using-regular-expressions-in-java/
+
     public static Boolean passesAllSafePasswordTests(String pw) {
-        return false;
+
+        // Regex to check valid password.
+        String regex = "^(?=.*\\d)"                     // min 1 digits
+                + "(?=.*[a-z])(?=.*[A-Z])"              // min 1 lowercase and 1 uppercase letter
+                + "(?=.*[<([{^\\-=$!|]})?*+.>])"        // min 1 special character
+                + "(?=\\S+$).{8,64}$";                  // no whitespaces + length between 8 & 64
+
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+
+        // If the password is empty
+        // return false
+        if (pw == null) {
+            return false;
+        }
+
+        // Pattern class contains matcher() method
+        // to find matching between given password
+        // and regular expression.
+        Matcher m = p.matcher(pw);
+
+        // Return if the password
+        // matched the ReGex
+        return m.matches();
     }
 }
