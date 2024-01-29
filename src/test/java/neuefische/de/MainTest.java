@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
 
-    /*
+    /* template
     // GIVEN
     // WHEN
     // THEN
@@ -25,7 +25,7 @@ class MainTest {
     }
 
     @Test
-    void hasAtLeast8Characters(){
+    void hasAtLeast8Characters_WhenMoreThan7_returnTrue(){
         // GIVEN
         String pw = "12345678Ab!";
         // WHEN
@@ -35,7 +35,17 @@ class MainTest {
     }
 
     @Test
-    void containsDigits(){
+    void hasAtLeast8Characters_WhenLessThan8_returnFalse(){
+        // GIVEN
+        String pw = "12345";
+        // WHEN
+        Boolean actual = Main.hasAtLeast8Characters(pw);
+        // THEN
+        assertFalse(actual);
+    }
+
+    @Test
+    void containsDigits_WhenPasswordHasDigits_ThenReturnTrue(){
         // GIVEN
         String pw = "12345678Ab!";
         // WHEN
@@ -45,13 +55,33 @@ class MainTest {
     }
 
     @Test
-    void hasLowercaseLetters(){
+    void containsDigits_WhenPasswordHasNoDigits_ThenReturnFalse(){
+        // GIVEN
+        String pw = "asjlgkjalksjgAbs";
+        // WHEN
+        Boolean actual = Main.containsDigits(pw);
+        // THEN
+        assertFalse(actual);
+    }
+
+    @Test
+    void hasLowercaseLetters_WhenLowercaseIncluded_ThenReturnTrue(){
         // GIVEN
         String pw = "12345678Ab!";
         // WHEN
         Boolean actual = Main.hasLowercaseLetters(pw);
         // THEN
         assertTrue(actual);
+    }
+
+    @Test
+    void hasLowercaseLetters_WhenLowercaseMissing_ThenReturnFalse(){
+        // GIVEN
+        String pw = "12345678A123322ASDASD!";
+        // WHEN
+        Boolean actual = Main.hasLowercaseLetters(pw);
+        // THEN
+        assertFalse(actual);
     }
 
     @Test

@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         sayHelloWorld();
         String password1 = generateRandomPassword(16);
-        String password2 = generateRandomPassword(80);
+        String password2 = generateRandomPassword(20);
         String password3 = generateRandomPassword(4);
         System.out.println(password1);
         System.out.println(password2);
@@ -86,19 +86,20 @@ public class Main {
             System.out.println("changed password length to minimum length");
         }
 
+        StringBuilder result = new StringBuilder();
 
-        Random r = new Random();
-
+        // String with all possible characters
         String alphabet = "<([{\\^-=$!|]})?*+.>" +
                 "0123456789" +
                 "abcdefghijklmnopqrstuvwxyz".toUpperCase() +
                 "abcdefghijklmnopqrstuvwxyz";
 
-        StringBuilder result = new StringBuilder();
+        while (!passesAllSafePasswordTests(result.toString())){
+            Random r = new Random();
 
-
-        for (int i = 0; i < passwordLength; i++) {
-            result.append(alphabet.charAt(r.nextInt(alphabet.length())));
+            for (int i = 0; i < passwordLength; i++) {
+                result.append(alphabet.charAt(r.nextInt(alphabet.length())));
+            }
         }
 
         return result.toString();
