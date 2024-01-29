@@ -1,6 +1,8 @@
 package neuefische.de;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.FileNotFoundException;
 
@@ -105,7 +107,7 @@ class MainTest {
     }
 
     @Test
-    void isCommonlyUsedPassword_When12345678AbX_returnFalse() throws FileNotFoundException {
+    void isCommonlyUsedPassword_WhenStrongPassword_returnFalse() throws FileNotFoundException {
         // GIVEN
         String pw = "12345678Ab!";
         // WHEN
@@ -114,8 +116,10 @@ class MainTest {
         assertFalse(actual);
     }
 
-    @Test
-    void isCommonlyUsedPassword_WhenPassword_returnTrue() throws FileNotFoundException {
+
+    @ParameterizedTest
+    @ValueSource(strings = { "password", "pentagon", "swordfish" })
+    void isCommonlyUsedPassword_WhenCommonPassword_returnTrue() throws FileNotFoundException {
         // GIVEN
         String pw = "password";
         // WHEN
