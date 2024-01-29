@@ -15,7 +15,6 @@ public class Main {
     public static void sayHelloWorld() {
         StringBuilder sb = new StringBuilder();
         sb.append("Hello world!\n");
-        sb.append("in this recap lecture we will ignore the fact that REGEX exists!\n");
         System.out.println(sb);
     }
 
@@ -63,9 +62,10 @@ public class Main {
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 final String lineFromFile = scanner.nextLine();
-                System.out.println(lineFromFile);
                 if (lineFromFile.contains(pw)) {
                     // found a weak password
+                    System.out.println("Found your committed password:");
+                    System.out.println(lineFromFile);
                     return true;
                 }
             }
